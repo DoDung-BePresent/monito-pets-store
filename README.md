@@ -4,7 +4,7 @@ This project is a software system developed for the SWD392 course: Software Desi
 
 ## Project Overview
 
-Monito Pets Store is a [Describe the main goal or functionality of your pet store application here, e.g., "web application designed to facilitate the buying and selling of pets and pet-related products," or "platform for pet adoption and care information."]. This project demonstrates the application of fundamental design concepts, design notations, and various design methods.
+[...SOMETHING...]
 
 ## Tech Stack
 
@@ -14,8 +14,8 @@ The project is divided into two main parts: a client-side application and a serv
 
 - **Framework/Library:** React with TypeScript
 - **Build Tool:** Vite
-- **Styling:** [Potentially Tailwind CSS, Ant Design - based on `client/package.json` dependencies. You can confirm and list them here.]
-- **State Management:** [e.g., React Context, React Query - based on `client/package.json` and `client/src/providers/QueryProvider.tsx`]
+- **Styling:** [...SOMETHING...]
+- **State Management:** [...SOMETHING...]
 - **Routing:** React Router DOM
 
 ### Server (Backend)
@@ -23,7 +23,7 @@ The project is divided into two main parts: a client-side application and a serv
 - **Framework:** Express.js
 - **Language:** TypeScript
 - **Database:** MongoDB (using Mongoose)
-- **Authentication:** [If implemented, describe here]
+- **Authentication:** [...SOMETHING...]
 
 ## Project Structure
 
@@ -97,10 +97,6 @@ monito-pets-store/
     npm run dev
     ```
     The client application will typically start on `http://localhost:5173` (Vite's default port).
-
-## License
-
-[See License Suggestion Below]
 
 ---
 
