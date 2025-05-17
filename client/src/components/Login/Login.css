@@ -1,4 +1,4 @@
-.login-container {
+.login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,7 @@
   padding: 20px;
 }
 
-.login-box {
+.login__box {
   background: white;
   padding: 40px;
   border-radius: 10px;
@@ -16,25 +16,29 @@
   max-width: 400px;
 }
 
-.login-box h2 {
+.login__title {
   text-align: center;
   color: #333;
   margin-bottom: 30px;
   font-size: 24px;
 }
 
-.form-group {
+.login__form {
+  width: 100%;
+}
+
+.login__form-group {
   margin-bottom: 20px;
 }
 
-.form-group label {
+.login__label {
   display: block;
   margin-bottom: 8px;
   color: #555;
   font-weight: 500;
 }
 
-.form-group input {
+.login__input {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
@@ -43,13 +47,13 @@
   transition: border-color 0.3s ease;
 }
 
-.form-group input:focus {
+.login__input:focus {
   outline: none;
   border-color: #4a90e2;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
 }
 
-.login-button {
+.login__button {
   width: 100%;
   padding: 12px;
   background: #4a90e2;
@@ -62,24 +66,24 @@
   transition: background-color 0.3s ease;
 }
 
-.login-button:hover {
+.login__button:hover {
   background: #357abd;
 }
 
-.login-links {
+.login__links {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
   font-size: 14px;
 }
 
-.login-links a {
+.login__link {
   color: #4a90e2;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.login-links a:hover {
+.login__link:hover {
   color: #357abd;
   text-decoration: underline;
 } 

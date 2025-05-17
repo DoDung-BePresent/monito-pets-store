@@ -1,4 +1,4 @@
-.register-container {
+.register {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,7 @@
   padding: 20px;
 }
 
-.register-box {
+.register__box {
   background: white;
   padding: 40px;
   border-radius: 10px;
@@ -16,25 +16,29 @@
   max-width: 500px;
 }
 
-.register-box h2 {
+.register__title {
   text-align: center;
   color: #333;
   margin-bottom: 30px;
   font-size: 24px;
 }
 
-.form-group {
+.register__form {
+  width: 100%;
+}
+
+.register__form-group {
   margin-bottom: 20px;
 }
 
-.form-group label {
+.register__label {
   display: block;
   margin-bottom: 8px;
   color: #555;
   font-weight: 500;
 }
 
-.form-group input {
+.register__input {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
@@ -43,13 +47,13 @@
   transition: border-color 0.3s ease;
 }
 
-.form-group input:focus {
+.register__input:focus {
   outline: none;
   border-color: #4a90e2;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
 }
 
-.register-button {
+.register__button {
   width: 100%;
   padding: 12px;
   background: #4a90e2;
@@ -62,28 +66,28 @@
   transition: background-color 0.3s ease;
 }
 
-.register-button:hover {
+.register__button:hover {
   background: #357abd;
 }
 
-.register-links {
+.register__links {
   margin-top: 20px;
   text-align: center;
   font-size: 14px;
 }
 
-.register-links span {
+.register__text {
   color: #666;
   margin-right: 8px;
 }
 
-.register-links a {
+.register__link {
   color: #4a90e2;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.register-links a:hover {
+.register__link:hover {
   color: #357abd;
   text-decoration: underline;
 } 

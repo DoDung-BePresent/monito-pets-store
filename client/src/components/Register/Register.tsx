@@ -26,13 +26,16 @@ const Register = () => {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-box">
-        <h2>Đăng ký tài khoản</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="fullName">Họ và tên</label>
+    <div className="register">
+      <div className="register__box">
+        <h2 className="register__title">Đăng ký tài khoản</h2>
+        <form className="register__form" onSubmit={handleSubmit}>
+          <div className="register__form-group">
+            <label className="register__label" htmlFor="fullName">
+              Họ và tên
+            </label>
             <input
+              className="register__input"
               type="text"
               id="fullName"
               name="fullName"
@@ -42,9 +45,12 @@ const Register = () => {
               placeholder="Nhập họ và tên của bạn"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+          <div className="register__form-group">
+            <label className="register__label" htmlFor="email">
+              Email
+            </label>
             <input
+              className="register__input"
               type="email"
               id="email"
               name="email"
@@ -54,9 +60,12 @@ const Register = () => {
               placeholder="Nhập email của bạn"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="phone">Số điện thoại</label>
+          <div className="register__form-group">
+            <label className="register__label" htmlFor="phone">
+              Số điện thoại
+            </label>
             <input
+              className="register__input"
               type="tel"
               id="phone"
               name="phone"
@@ -66,9 +75,12 @@ const Register = () => {
               placeholder="Nhập số điện thoại của bạn"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Mật khẩu</label>
+          <div className="register__form-group">
+            <label className="register__label" htmlFor="password">
+              Mật khẩu
+            </label>
             <input
+              className="register__input"
               type="password"
               id="password"
               name="password"
@@ -78,9 +90,12 @@ const Register = () => {
               placeholder="Nhập mật khẩu của bạn"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Xác nhận mật khẩu</label>
+          <div className="register__form-group">
+            <label className="register__label" htmlFor="confirmPassword">
+              Xác nhận mật khẩu
+            </label>
             <input
+              className="register__input"
               type="password"
               id="confirmPassword"
               name="confirmPassword"
@@ -90,13 +105,15 @@ const Register = () => {
               placeholder="Nhập lại mật khẩu của bạn"
             />
           </div>
-          <button type="submit" className="register-button">
+          <button type="submit" className="register__button">
             Đăng ký
           </button>
         </form>
-        <div className="register-links">
-          <span>Đã có tài khoản?</span>
-          <Link to="/login">Đăng nhập</Link>
+        <div className="register__links">
+          <span className="register__text">Đã có tài khoản?</span>
+          <Link className="register__link" to="/login">
+            Đăng nhập
+          </Link>
         </div>
       </div>
     </div>
