@@ -12,6 +12,7 @@ import { MainLayout } from "@/layouts/MainLayout";
  * Pages
  */
 import { HomePage } from "@/pages/home/HomePage";
+import LoginPage from "@/pages/auth/LoginPage";
 
 export const AppRoutes = () => {
   return (
@@ -20,6 +21,8 @@ export const AppRoutes = () => {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
         </Route>
+        {/* Auth routes */}
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

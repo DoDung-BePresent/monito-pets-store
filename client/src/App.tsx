@@ -3,11 +3,14 @@
  */
 import { AppRoutes } from "@/routes/AppRoutes";
 import { QueryProvider } from "./providers/QueryProvider";
+import { AuthProvider } from "./contexts/AuthProvider";
 
 const App = () => {
   return (
     <QueryProvider>
-      <AppRoutes />
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
     </QueryProvider>
   );
 };
