@@ -1,15 +1,11 @@
 /**
  * Routes
  */
-import { AppRoutes } from "@/routes/AppRoutes";
-import { QueryProvider } from "./providers/QueryProvider";
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes';
 
-const App = () => {
-  return (
-    <QueryProvider>
-      <AppRoutes />
-    </QueryProvider>
-  );
-};
+function App() {
+  return <RouterProvider router={router} />;
+}
 
 export default App;
