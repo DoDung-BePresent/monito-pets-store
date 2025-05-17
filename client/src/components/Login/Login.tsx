@@ -23,13 +23,16 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h2>Đăng nhập</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+    <div className="login">
+      <div className="login__box">
+        <h2 className="login__title">Đăng nhập</h2>
+        <form className="login__form" onSubmit={handleSubmit}>
+          <div className="login__form-group">
+            <label className="login__label" htmlFor="email">
+              Email
+            </label>
             <input
+              className="login__input"
               type="email"
               id="email"
               name="email"
@@ -39,9 +42,12 @@ const Login = () => {
               placeholder="Nhập email của bạn"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Mật khẩu</label>
+          <div className="login__form-group">
+            <label className="login__label" htmlFor="password">
+              Mật khẩu
+            </label>
             <input
+              className="login__input"
               type="password"
               id="password"
               name="password"
@@ -51,13 +57,17 @@ const Login = () => {
               placeholder="Nhập mật khẩu của bạn"
             />
           </div>
-          <button type="submit" className="login-button">
+          <button type="submit" className="login__button">
             Đăng nhập
           </button>
         </form>
-        <div className="login-links">
-          <Link to="/forgot-password">Quên mật khẩu?</Link>
-          <Link to="/register">Đăng ký tài khoản mới</Link>
+        <div className="login__links">
+          <Link className="login__link" to="/forgot-password">
+            Quên mật khẩu?
+          </Link>
+          <Link className="login__link" to="/register">
+            Đăng ký tài khoản mới
+          </Link>
         </div>
       </div>
     </div>
