@@ -1,27 +1,65 @@
-import express from "express";
-import dotenv from "dotenv";
-import connectDB from "./configs/db";
+/**
+ * Node modules
+ */
+import 'dotenv/config';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import express, { NextFunction, Request, Response } from 'express';
 
-dotenv.config();
+/**
+ * Import configs
+ */
+import { connectDB } from './config/connectDB';
 
+/**
+ * Import Middlewares
+ */
+import { errorHandler } from './middlewares/errorHandler';
+
+/**
+ * Import Routes
+ */
+import authRoute from './routes/authRoute';
+import userRoute from './routes/userRoute';
+
+/**
+ * App
+ */
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middlewares
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_ORIGIN,
+    credentials: true,
+  }),
+);
+app.use(cookieParser());
 
-// Routes
-app.get("/", (req, res) => {
-  res.send("API is running...");
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  res.json({
+    message: 'Hello',
+  });
 });
 
-app.listen(() => {
-  console.log("Server is running on port: ", PORT);
-});
+/**
+ * PORTS
+ */
+const PORT = process.env.PORT || 5000;
+const BASE_PATH = process.env.BASE_PATH;
 
-// // Connect DB and start server
-// connectDB().then(() => {
-//   app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-//   });
-// });
+/**
+ * Routes
+ */
+app.use(`${BASE_PATH}/auth`, authRoute);
+app.use(`${BASE_PATH}/user`, userRoute);
+
+/**
+ * Error Handler
+ */
+app.use(errorHandler);
+
+app.listen(PORT, async () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+  await connectDB();
+});
