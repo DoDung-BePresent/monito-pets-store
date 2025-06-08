@@ -1,13 +1,30 @@
 /**
+ * Node modules
+ */
+import { BrowserRouter } from 'react-router-dom';
+
+/**
  * Routes
  */
-import { AppRoutes } from "@/routes/AppRoutes";
-import { QueryProvider } from "./providers/QueryProvider";
+import AppRoutes from '@/routers/AppRoutes';
+
+/**
+ * Providers
+ */
+import { QueryProvider } from '@/providers/QueryProvider';
+
+/**
+ * Components
+ */
+import { Toaster } from '@/components/ui/sonner';
 
 const App = () => {
   return (
     <QueryProvider>
-      <AppRoutes />
+      <BrowserRouter>
+        <AppRoutes />
+        <Toaster richColors />
+      </BrowserRouter>
     </QueryProvider>
   );
 };
