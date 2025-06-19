@@ -12,11 +12,13 @@ import { Button } from '@/components/ui/button';
  * Assets
  */
 import HeroBannerSectionImage from '@/assets/hero-section.png';
-
+import HomeHeader from './HomeHeader';
 const HeroSection = () => {
   return (
-    <section className="relative h-[calc(100vh-78px)] overflow-hidden rounded-b-4xl bg-gradient-to-r from-[#FCEED5] to-[#FFE7BA] px-8 py-16">
-      <div className="mx-auto flex max-w-7xl items-center">
+    <>
+    <HomeHeader/>
+    <section className="relative h-[calc(100vh-280px)] overflow-hidden rounded-b-4xl bg-gradient-to-r from-[#FCEED5] to-[#FFE7BA] py-8">
+      <div className="mx-auto flex w-full max-w-screen-xl items-center justify-between px-8">
         <div className="mt-20 flex-1 space-y-6">
           <div className="relative">
             <h1 className="relative z-[5] text-6xl leading-tight font-bold text-[#003459]">
@@ -52,10 +54,11 @@ const HeroSection = () => {
       <div className="absolute -bottom-[630px] left-5 z-[5] aspect-square w-[635px] rotate-[60deg] rounded-[99px] bg-[#F7DBA7]" />
       <img
         src={HeroBannerSectionImage}
-        className="absolute bottom-0 z-[6] right-0"
+        className="absolute right-0 bottom-0 z-[6]"
         alt="Hero banner image"
       />
     </section>
+    </>
   );
 };
 

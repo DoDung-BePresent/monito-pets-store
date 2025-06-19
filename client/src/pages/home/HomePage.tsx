@@ -5,10 +5,13 @@
 /**
  * Components
  */
-import { Button } from '@/components/ui/button';
-import { Logo } from '@/components/Logo';
+
+import AdoptionBanner from './components/AdoptionBanner';
+import Banner from './components/Banner';
 import HeroSection from './components/HeroSection';
+import { ProductShowcaseSection } from './components/ProductShowcaseSection';
 import WhatNewSection from './components/WhatNewSection';
+import { PetKnowledgeSection } from './PetKnowledgeSection';
 
 const HomePage = () => {
   return (
@@ -20,10 +23,17 @@ const HomePage = () => {
       <WhatNewSection />
 
       {/* Newsletter */}
+      <Banner />
 
+      {/* Our Products */}
+      <ProductShowcaseSection />
 
+      {/*Adoption Banner */}
+      <AdoptionBanner />
+
+      {/*Pet KnowLedge  */}
+      <PetKnowledgeSection />
       {/* Footer */}
-      
     </div>
   );
 };

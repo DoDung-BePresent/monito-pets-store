@@ -8,14 +8,14 @@ import { Input } from '@/components/ui/input';
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#FCEED5] px-8 py-12">
+    <footer className="rounded-tl-[40px] rounded-tr-[40px] bg-[#FCEED5] px-8 py-12">
       <div className="mx-auto max-w-7xl rounded-md bg-[#003459]">
         <div className="flex items-center justify-between p-7 px-8">
           <h2 className="max-w-[380px] text-2xl font-bold text-white">
             Register Now So You Don't Miss Our Programs
           </h2>
           <div className="flex items-center justify-center gap-2 rounded-md bg-white p-2.5 py-2.5">
-            <Input placeholder="Enter your email" className='w-[400px]' />
+            <Input placeholder="Enter your email" className="w-[400px]" />
             <Button className="bg-[#003459] hover:bg-[#003459]/90">
               Subscribe Now
             </Button>
