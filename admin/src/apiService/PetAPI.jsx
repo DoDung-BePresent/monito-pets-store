@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api/admin/pets";
+const url = "https://66f6699f436827ced97704c4.mockapi.io/pets";
 
 const getHeaders = () => {
   return {
@@ -14,7 +14,8 @@ export const fetchPets = async () => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch pets");
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch pets: ${response.status} ${errorText}`);
     }
     const data = await response.json();
     return data;
@@ -32,7 +33,8 @@ export const addPet = async (newPet) => {
       body: JSON.stringify(newPet),
     });
     if (!response.ok) {
-      throw new Error("Failed to add new pet");
+      const errorText = await response.text();
+      throw new Error(`Failed to add new pet: ${response.status} ${errorText}`);
     }
     return await response.json();
   } catch (error) {
@@ -44,12 +46,13 @@ export const addPet = async (newPet) => {
 export const editPet = async (id, updatedData) => {
   try {
     const response = await fetch(`${url}/${id}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: getHeaders(),
       body: JSON.stringify(updatedData),
     });
     if (!response.ok) {
-      throw new Error("Failed to edit pet");
+      const errorText = await response.text();
+      throw new Error(`Failed to edit pet: ${response.status} ${errorText}`);
     }
     return await response.json();
   } catch (error) {
@@ -65,7 +68,8 @@ export const deletePet = async (id) => {
       headers: getHeaders(),
     });
     if (!response.ok) {
-      throw new Error("Failed to delete pet");
+      const errorText = await response.text();
+      throw new Error(`Failed to delete pet: ${response.status} ${errorText}`);
     }
   } catch (error) {
     console.error("Error deleting pet:", error);

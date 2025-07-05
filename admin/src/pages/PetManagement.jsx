@@ -17,10 +17,13 @@ import {
   TableHead,
   TableRow,
   IconButton,
+  Tooltip,
+  Avatar
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import PetsIcon from "@mui/icons-material/Pets";
 
 const PetManagement = () => {
   const { pets, loading, error, createPet, updatePet, removePet } = useContext(PetContext);
@@ -98,57 +101,86 @@ const PetManagement = () => {
   if (error) return <Typography color="error">{error}</Typography>;
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
-        <Typography variant="h4">Pet Management</Typography>
+    <Box sx={{ p: { xs: 1, md: 3 } }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
+        <Typography variant="h3" sx={{ fontWeight: "bold", textAlign: "center" }}>
+          <PetsIcon sx={{ mr: 1, color: "#1976d2" }} />
+          Pet Management
+        </Typography>
         <Button
           variant="contained"
           startIcon={<AddIcon />}
           onClick={handleOpen}
+          sx={{
+            fontWeight: "bold",
+            fontSize: 16,
+            px: 3,
+            py: 1.5,
+            borderRadius: 2,
+            boxShadow: 2,
+            background: "linear-gradient(90deg, #1976d2 0%, #42a5f5 100%)"
+          }}
         >
-          Add New Pet
+          ADD NEW PET
         </Button>
       </Box>
-
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Species</TableCell>
-              <TableCell>Breed</TableCell>
-              <TableCell>Age</TableCell>
-              <TableCell>Weight</TableCell>
-              <TableCell>Owner Name</TableCell>
-              <TableCell>Owner Phone</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {pets.map((pet) => (
-              <TableRow key={pet.id}>
-                <TableCell>{pet.name}</TableCell>
-                <TableCell>{pet.species}</TableCell>
-                <TableCell>{pet.breed}</TableCell>
-                <TableCell>{pet.age}</TableCell>
-                <TableCell>{pet.weight}</TableCell>
-                <TableCell>{pet.ownerName}</TableCell>
-                <TableCell>{pet.ownerPhone}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => handleEdit(pet)} color="primary">
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton onClick={() => handleDelete(pet.id)} color="error">
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
+      <Paper elevation={3} sx={{ borderRadius: 3, overflow: "hidden" }}>
+        <TableContainer>
+          <Table>
+            <TableHead sx={{ background: "#f5f5f5" }}>
+              <TableRow>
+                <TableCell>Avatar</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Species</TableCell>
+                <TableCell>Breed</TableCell>
+                <TableCell>Age</TableCell>
+                <TableCell>Weight</TableCell>
+                <TableCell>Owner Name</TableCell>
+                <TableCell>Owner Phone</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
-      <Dialog open={open} onClose={handleClose}>
+            </TableHead>
+            <TableBody>
+              {pets.map((pet) => (
+                <TableRow
+                  key={pet.id}
+                  hover
+                  sx={{
+                    transition: "background 0.2s",
+                    "&:hover": { background: "#e3f2fd" }
+                  }}
+                >
+                  <TableCell>
+                    <Avatar sx={{ bgcolor: "#1976d2" }}>
+                      {pet.name ? pet.name[0].toUpperCase() : <PetsIcon />}
+                    </Avatar>
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: 500 }}>{pet.name}</TableCell>
+                  <TableCell>{pet.species}</TableCell>
+                  <TableCell>{pet.breed}</TableCell>
+                  <TableCell>{pet.age}</TableCell>
+                  <TableCell>{pet.weight}</TableCell>
+                  <TableCell>{pet.ownerName}</TableCell>
+                  <TableCell>{pet.ownerPhone}</TableCell>
+                  <TableCell align="center">
+                    <Tooltip title="Edit">
+                      <IconButton onClick={() => handleEdit(pet)} color="primary">
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete">
+                      <IconButton onClick={() => handleDelete(pet.id)} color="error">
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>{editMode ? "Edit Pet" : "Add New Pet"}</DialogTitle>
         <DialogContent>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
@@ -221,7 +253,7 @@ const PetManagement = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit} variant="contained">
+          <Button type="submit" variant="contained" onClick={handleSubmit}>
             {editMode ? "Update" : "Add"}
           </Button>
         </DialogActions>

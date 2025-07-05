@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api/admin/products";
+const url = "https://66f6699f436827ced97704c4.mockapi.io/products";
 
 const getHeaders = () => ({
   "Content-Type": "application/json"
@@ -10,7 +10,10 @@ export const fetchProducts = async () => {
       method: "GET",
       headers: getHeaders(),
     });
-    if (!response.ok) throw new Error("Failed to fetch products");
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch products: ${response.status} ${errorText}`);
+    }
     return await response.json();
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -25,7 +28,10 @@ export const addProduct = async (newProduct) => {
       headers: getHeaders(),
       body: JSON.stringify(newProduct),
     });
-    if (!response.ok) throw new Error("Failed to add new product");
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to add new product: ${response.status} ${errorText}`);
+    }
     return await response.json();
   } catch (error) {
     console.error("Error adding new product:", error);
@@ -36,11 +42,14 @@ export const addProduct = async (newProduct) => {
 export const editProduct = async (id, updatedData) => {
   try {
     const response = await fetch(`${url}/${id}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: getHeaders(),
       body: JSON.stringify(updatedData),
     });
-    if (!response.ok) throw new Error("Failed to edit product");
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to edit product: ${response.status} ${errorText}`);
+    }
     return await response.json();
   } catch (error) {
     console.error("Error editing product:", error);
@@ -54,7 +63,10 @@ export const deleteProduct = async (id) => {
       method: "DELETE",
       headers: getHeaders(),
     });
-    if (!response.ok) throw new Error("Failed to delete product");
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to delete product: ${response.status} ${errorText}`);
+    }
   } catch (error) {
     console.error("Error deleting product:", error);
     throw error;

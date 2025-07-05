@@ -10,12 +10,13 @@ export const OrdersProvider = ({ children }) => {
 
   const getOrders = async () => {
     setLoading(true);
+    setError(null);
     try {
       const data = await fetchOrders();
       setOrders(data);
-      setError(null);
     } catch (err) {
-      setError('Failed to fetch orders');
+      console.error('Error in getOrders:', err);
+      setError(`Failed to fetch orders: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -23,12 +24,13 @@ export const OrdersProvider = ({ children }) => {
 
   const addOrderHandler = async (order) => {
     setLoading(true);
+    setError(null);
     try {
       const newOrder = await addOrder(order);
       setOrders((prev) => [...prev, newOrder]);
-      setError(null);
     } catch (err) {
-      setError('Failed to add order');
+      console.error('Error in addOrderHandler:', err);
+      setError(`Failed to add order: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -36,12 +38,13 @@ export const OrdersProvider = ({ children }) => {
 
   const updateOrder = async (id, updated) => {
     setLoading(true);
+    setError(null);
     try {
       const updatedOrder = await editOrder(id, updated);
       setOrders((prev) => prev.map(o => o.id === id ? updatedOrder : o));
-      setError(null);
     } catch (err) {
-      setError('Failed to update order');
+      console.error('Error in updateOrder:', err);
+      setError(`Failed to update order: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -49,12 +52,13 @@ export const OrdersProvider = ({ children }) => {
 
   const deleteOrder = async (id) => {
     setLoading(true);
+    setError(null);
     try {
       await apiDeleteOrder(id);
       setOrders((prev) => prev.filter(o => o.id !== id));
-      setError(null);
     } catch (err) {
-      setError('Failed to delete order');
+      console.error('Error in deleteOrder:', err);
+      setError(`Failed to delete order: ${err.message}`);
     } finally {
       setLoading(false);
     }

@@ -10,12 +10,13 @@ export const CustomersProvider = ({ children }) => {
 
   const getCustomers = async () => {
     setLoading(true);
+    setError(null);
     try {
       const data = await fetchCustomers();
       setCustomers(data);
-      setError(null);
     } catch (err) {
-      setError('Failed to fetch customers');
+      console.error('Error in getCustomers:', err);
+      setError(`Failed to fetch customers: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -23,12 +24,13 @@ export const CustomersProvider = ({ children }) => {
 
   const addCustomerHandler = async (customer) => {
     setLoading(true);
+    setError(null);
     try {
       const newCustomer = await addCustomer(customer);
       setCustomers((prev) => [...prev, newCustomer]);
-      setError(null);
     } catch (err) {
-      setError('Failed to add customer');
+      console.error('Error in addCustomerHandler:', err);
+      setError(`Failed to add customer: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -36,12 +38,13 @@ export const CustomersProvider = ({ children }) => {
 
   const updateCustomer = async (id, updated) => {
     setLoading(true);
+    setError(null);
     try {
       const updatedCustomer = await editCustomer(id, updated);
       setCustomers((prev) => prev.map(c => c.id === id ? updatedCustomer : c));
-      setError(null);
     } catch (err) {
-      setError('Failed to update customer');
+      console.error('Error in updateCustomer:', err);
+      setError(`Failed to update customer: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -49,12 +52,13 @@ export const CustomersProvider = ({ children }) => {
 
   const deleteCustomer = async (id) => {
     setLoading(true);
+    setError(null);
     try {
       await apiDeleteCustomer(id);
       setCustomers((prev) => prev.filter(c => c.id !== id));
-      setError(null);
     } catch (err) {
-      setError('Failed to delete customer');
+      console.error('Error in deleteCustomer:', err);
+      setError(`Failed to delete customer: ${err.message}`);
     } finally {
       setLoading(false);
     }

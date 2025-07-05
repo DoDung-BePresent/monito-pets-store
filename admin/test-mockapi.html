@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MockAPI.io Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { margin: 10px; padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; }
+        .error { border-color: #dc3545; background: #f8d7da; color: #721c24; }
+        .success { border-color: #28a745; background: #d4edda; color: #155724; }
+        pre { white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+    <h1>MockAPI.io Test</h1>
+    
+    <div>
+        <button onclick="testCustomers()">Test Customers API</button>
+        <button onclick="testOrders()">Test Orders API</button>
+        <button onclick="testPets()">Test Pets API</button>
+        <button onclick="testProducts()">Test Products API</button>
+        <button onclick="testAll()">Test All APIs</button>
+    </div>
+    
+    <div id="result"></div>
+
+    <script>
+        const baseURL = 'https://66f6699f436827ced97704c4.mockapi.io';
+        
+        function showResult(title, data, isError = false) {
+            const resultDiv = document.getElementById('result');
+            const className = isError ? 'result error' : 'result success';
+            resultDiv.innerHTML = `
+                <div class="${className}">
+                    <h3>${title}</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                </div>
+            `;
+        }
+        
+        async function testAPI(endpoint, title) {
+            try {
+                const response = await fetch(`${baseURL}/${endpoint}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    showResult(`${title} - Error (${response.status})`, errorText, true);
+                    return false;
+                }
+                
+                const data = await response.json();
+                showResult(`${title} - Success`, data);
+                return true;
+            } catch (error) {
+                showResult(`${title} - Network Error`, error.message, true);
+                return false;
+            }
+        }
+        
+        async function testCustomers() {
+            await testAPI('customers', 'Customers API');
+        }
+        
+        async function testOrders() {
+            await testAPI('orders', 'Orders API');
+        }
+        
+        async function testPets() {
+            await testAPI('pets', 'Pets API');
+        }
+        
+        async function testProducts() {
+            await testAPI('products', 'Products API');
+        }
+        
+        async function testAll() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<div class="result"><h3>Testing All APIs...</h3></div>';
+            
+            const results = [];
+            
+            results.push(await testAPI('customers', 'Customers API'));
+            results.push(await testAPI('orders', 'Orders API'));
+            results.push(await testAPI('pets', 'Pets API'));
+            results.push(await testAPI('products', 'Products API'));
+            
+            const successCount = results.filter(r => r).length;
+            const totalCount = results.length;
+            
+            resultDiv.innerHTML += `
+                <div class="result ${successCount === totalCount ? 'success' : 'error'}">
+                    <h3>Summary</h3>
+                    <p>Success: ${successCount}/${totalCount} APIs working</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html> 

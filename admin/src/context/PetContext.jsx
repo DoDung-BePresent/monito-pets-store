@@ -10,12 +10,13 @@ export const PetProvider = ({ children }) => {
 
   const getPets = async () => {
     setLoading(true);
+    setError(null);
     try {
       const data = await fetchPets();
       setPets(data);
     } catch (error) {
       console.error("Error fetching pets:", error);
-      setError(error.message);
+      setError(`Failed to fetch pets: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -23,12 +24,13 @@ export const PetProvider = ({ children }) => {
 
   const createPet = async (newPet) => {
     setLoading(true);
+    setError(null);
     try {
       const addedPet = await addPet(newPet);
       setPets((prevPets) => [...prevPets, addedPet]);
-      setError(null);
     } catch (error) {
-      setError(error.message);
+      console.error("Error creating pet:", error);
+      setError(`Failed to create pet: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -36,14 +38,15 @@ export const PetProvider = ({ children }) => {
 
   const updatePet = async (id, updatedData) => {
     setLoading(true);
+    setError(null);
     try {
       const updatedPet = await editPet(id, updatedData);
       setPets((prevPets) =>
         prevPets.map((pet) => (pet.id === id ? updatedPet : pet))
       );
-      setError(null);
     } catch (error) {
-      setError(error.message);
+      console.error("Error updating pet:", error);
+      setError(`Failed to update pet: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -51,12 +54,13 @@ export const PetProvider = ({ children }) => {
 
   const removePet = async (id) => {
     setLoading(true);
+    setError(null);
     try {
       await deletePet(id);
       setPets((prevPets) => prevPets.filter((pet) => pet.id !== id));
-      setError(null);
     } catch (error) {
-      setError(error.message);
+      console.error("Error deleting pet:", error);
+      setError(`Failed to delete pet: ${error.message}`);
     } finally {
       setLoading(false);
     }
